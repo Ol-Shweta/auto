@@ -12,6 +12,8 @@ export type SidebarItem = {
   href?: string;
   icon: any;
   children?: SidebarItem[];
+  roles?: string[];
+  disabled?: boolean;
 };
 
 export const MAIN_NAV: SidebarItem[] = [
@@ -47,7 +49,7 @@ export const MAIN_NAV: SidebarItem[] = [
       },
       {
         label: "Preferences",
-        href: "/dashboard/settings/preferences",
+        href: "/dashboard/settings#preferences",
         icon: Settings,
       },
     ],
@@ -58,17 +60,36 @@ export const ADMIN_NAV: SidebarItem[] = [
   {
     label: "User Management",
     icon: Users,
+    roles: ["admin", "manager"],
     children: [
       {
         label: "Users",
-        href: "/admin/users",
+        href: "/dashboard/admin/users",
         icon: Users,
+        roles: ["admin", "manager"],
       },
       {
         label: "Roles & Access",
-        href: "/admin/roles",
+        href: "/dashboard/admin/roles",
         icon: ShieldCheck,
+        roles: ["admin"], // 🔐 admin-only
+      },
+      {
+        label: "Teams",
+        href: "/dashboard/admin/teams",
+        icon: Users,
+        roles: ["admin"],
+        disabled: true, // 🚧 not implemented yet
+      },
+      {
+        label: "Access Logs",
+        href: "/dashboard/admin/access-logs",
+        icon: Activity,
+        roles: ["admin"],
+        disabled: true, // 🚧 future feature
       },
     ],
   },
 ];
+
+

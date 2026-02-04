@@ -62,16 +62,12 @@ export default function Header() {
             </div>
 
             <div className="py-1">
-              <MenuItem
-                icon={<User size={16} />}
-                label="Profile"
-                onClick={() => router.push("/dashboard/settings")}
-              />
+              
 
               <MenuItem
                 icon={<Settings size={16} />}
                 label="Account Settings"
-                onClick={() => router.push("/dashboard/settings/security")}
+                onClick={() => router.push("/dashboard/settings")}
               />
 
               <div className="border-t my-1" />

@@ -1,13 +1,12 @@
 // lib/auth/requireUser.ts
-import "server-only";
 import { redirect } from "next/navigation";
-import { getSession } from "./getSession";
+import { getCurrentUser } from "./getCurrentUser";
 
 export async function requireUser() {
-  const { user } = await getSession();
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/login"); // Auth required
+    redirect("/auth/login");
   }
 
   return user;

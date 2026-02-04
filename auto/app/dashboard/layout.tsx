@@ -10,22 +10,13 @@ export default async function DashboardLayout({
   await requireUser();
 
   return (
-    <div className="h-screen w-screen bg-gray-100 overflow-hidden">
-      <div className="flex h-full">
-        {/* Sidebar */}
-        <Sidebar />
-
-        {/* Main Area */}
-        <div className="flex flex-1 flex-col overflow-hidden">
-          <Header />
-
-          <main
-            className="flex-1 overflow-y-auto p-6 transition-all duration-300"
-            role="main"
-          >
-            {children}
-          </main>
-        </div>
+    <div className="flex h-screen">
+      <Sidebar />
+      <div className="flex flex-1 flex-col">
+        <Header />
+        <main className="flex-1 overflow-y-auto p-6 bg-gray-50">
+          {children}
+        </main>
       </div>
     </div>
   );

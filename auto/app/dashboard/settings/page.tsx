@@ -8,30 +8,41 @@ export default async function SettingsPage() {
   const user = await requireUser();
 
   return (
-    <div className="max-w-6xl mx-auto space-y-10">
+    <div className="max-w-6xl mx-auto px-4 py-8 space-y-10">
       {/* PAGE HEADER */}
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">
           Account Settings
         </h1>
         <p className="text-sm text-gray-500 mt-1">
-          Manage your profile, security, and application preferences
+          Manage your profile, security, sessions, and application preferences
         </p>
       </div>
 
       {/* SETTINGS GRID */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* LEFT NAV / SECTION INDEX */}
-        <aside className="lg:col-span-1 space-y-2 text-sm">
+        {/* LEFT NAV */}
+        <aside className="lg:col-span-1">
           <SettingsNav />
         </aside>
 
         {/* RIGHT CONTENT */}
-        <div className="lg:col-span-2 space-y-10">
-          <ProfileSettings user={user} />
-          <SecuritySettings />
-          <SessionSettings />
-          <PreferenceSettings />
+        <div className="lg:col-span-2 space-y-16">
+          <section id="profile" className="scroll-mt-24">
+            <ProfileSettings user={user} />
+          </section>
+
+          <section id="security" className="scroll-mt-24">
+            <SecuritySettings />
+          </section>
+
+          <section id="sessions" className="scroll-mt-24">
+            <SessionSettings />
+          </section>
+
+          <section id="preferences" className="scroll-mt-24">
+            <PreferenceSettings />
+          </section>
         </div>
       </div>
     </div>
@@ -53,7 +64,7 @@ function SettingsNav() {
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              className="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100"
+              className="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition"
             >
               {item.label}
             </a>

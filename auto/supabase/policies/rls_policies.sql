@@ -243,3 +243,49 @@ create policy "Users can read incidents they reported"
   on incident_reports
   for select
   using (reporter_id = auth.jwt() ->> 'sub');
+
+
+-- =========================
+-- ENABLE RLS (NEW TABLES)
+-- =========================
+
+alter table imports enable row level security;
+alter table import_errors enable row level security;
+-- =========================
+
+-- =========================
+-- IMPORTS
+-- =========================
+
+-- Admins can manage all imports
+create policy "Admins can manage imports"
+  on imports
+  for all
+  using (auth.jwt() ->> 'role' = 'admin')
+  with check (auth.jwt() ->> 'role' = 'admin');
+
+-- Safety officers & managers can read imports
+create policy "Safety officers can read imports"
+  on imports
+  for select
+  using (auth.jwt() ->> 'role' in ('safety_officer', 'manager'));
+-- =========================
+
+-- =========================
+-- IMPORT_ERRORS
+-- =========================
+
+-- Admins can manage import errors
+create policy "Admins can manage import errors"
+  on import_errors
+  for all
+  using (auth.jwt() ->> 'role' = 'admin')
+  with check (auth.jwt() ->> 'role' = 'admin');
+
+-- Safety officers & managers can read import errors
+create policy "Safety officers can read import errors"
+  on import_errors
+  for select
+  using (auth.jwt() ->> 'role' in ('safety_officer', 'manager'));
+-- =========================
+
